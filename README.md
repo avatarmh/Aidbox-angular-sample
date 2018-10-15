@@ -1,7 +1,13 @@
 # Angular Patient CRUD application with Aidbox
 
 
-## Clone repository
+### Install backend
+
+Visit to [Aidbox
+documentation](https://docs.aidbox.app/installation/setup-aidbox.dev) for
+detailed information and instruction how to install Aidbox for development
+
+### Clone repository
 
 ``` bash
  $ git clone https://github.com/HealthSamurai/aidbox-angular-sample.git
@@ -9,9 +15,9 @@
 
 ```
 
-##  Configure Base URL
+###  Configure Base URL
 
-### Aidbox.Dev
+__Aidbox.Dev__
 
 If you use Aidbox.Dev as a backend, you need specify `AIDBOX_URL` http://localhost:8888
 
@@ -21,7 +27,7 @@ export const environment = {
 }
 ```
 
-### Aidbox.Coud
+__Aidbox.Coud__
 
 When you want run this sample application with Aidbox.Cloud you need
 specify `AIDBOX_URL` as https://<YOUR_BOX_NAME>.aidbox.app.
@@ -32,12 +38,12 @@ export const environment = {
 }
 ```
 
-## Requirements
+### Requirements
 
 This sample application required minimal [Node JS version 8.9](https://nodejs.org/en/)
 
 
-## Installation and start
+### Installation and start
 
 ``` bash
  $ npm install
