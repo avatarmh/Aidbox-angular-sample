@@ -1,14 +1,31 @@
-# AngularFrontend client for Aidbox
-
-## Installation
- npm install
-
-## Run in development mode
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. 
+# Angular Patient CRUD application with Aidbox
 
 
-## Backend server config
+## Clone repository
 
-enviroment.ts - AIDBOX_URL
+``` bash
+ $ git clone https://github.com/HealthSamurai/aidbox-angular-sample.git
+ $ cd aidbox-angular-sample
+
+```
+
+##  Configure Base URL
+
+Base URL configuring in `environment.ts` file
+
+``` typescript
+export const environment = {
+  AIDBOX_URL : "http://localhost:8888"
+}
+```
+
+## Installation and start
+
+``` bash
+ $ npm install
+ $ npm install -g @angular/cli 
+ $ ng serve
+
+```
+
 
