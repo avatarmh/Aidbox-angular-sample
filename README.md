@@ -9,16 +9,6 @@
 
 ```
 
-##  Configure Base URL
-
-Base URL configuring in `environment.ts` file
-
-``` typescript
-export const environment = {
-  AIDBOX_URL : "http://localhost:8888"
-}
-```
-
 ## Installation and start
 
 ``` bash
@@ -28,4 +18,18 @@ export const environment = {
 
 ```
 
+Open in browser [http://localhost:4200](http://localhost:4200)
 
+[IMG]
+
+
+
+##  Configure Base URL
+
+Base URL configuring in `environment.ts` file
+
+``` typescript
+export const environment = {
+  AIDBOX_URL : "http://localhost:8888"
+}
+```
