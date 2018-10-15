@@ -43,7 +43,7 @@ export const environment = {
 
 Open in browser [http://localhost:4200](http://localhost:4200)
 
-![asset/img/screen.png](asset/img/screen.png)
+![asset/img/screen.png](https://github.com/HealthSamurai/Aidbox-angular-sample/blob/master/src/assets/screen.png)
 
 
 
