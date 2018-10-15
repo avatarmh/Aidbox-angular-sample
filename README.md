@@ -32,6 +32,11 @@ export const environment = {
 }
 ```
 
+## Requirements
+
+This sample application required minimal [Node JS version 8.9](https://nodejs.org/en/)
+
+
 ## Installation and start
 
 ``` bash
