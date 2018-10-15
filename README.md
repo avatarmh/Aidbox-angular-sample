@@ -11,7 +11,9 @@
 
 ##  Configure Base URL
 
-Base URL configuring in `environment.ts` file
+### Aidbox.Dev
+
+If you use Aidbox.Dev as a backend, you need specify `AIDBOX_URL` http://localhost:8888
 
 ``` typescript
 export const environment = {
@@ -19,6 +21,16 @@ export const environment = {
 }
 ```
 
+### Aidbox.Coud
+
+When you want run this sample application with Aidbox.Cloud you need
+specify `AIDBOX_URL` as https://<YOUR_BOX_NAME>.aidbox.app.
+
+``` typescript
+export const environment = {
+  AIDBOX_URL : "https://<YOUR_BOX_NAME>.aidbox.app"
+}
+```
 
 ## Installation and start
 
@@ -31,7 +43,7 @@ export const environment = {
 
 Open in browser [http://localhost:4200](http://localhost:4200)
 
-[IMG]
+![asset/img/screen.png](asset/img/screen.png)
 
 
 
