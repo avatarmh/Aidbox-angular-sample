@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -13,7 +14,7 @@ import { objectToFhir, fhirToObject } from './patient.converter';
 import { environment } from '../../environment';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
 
@@ -33,17 +34,25 @@ export class PatientService {
   ) { }
 
   getPatients(patientName = '', page = 1, count = defaultCount): void {
-    let url = `${this.baseURL}/fhir/Patient?_page=${page}&_count=${count}`;
-    this.store.dispatch({ type: LOADING });
+    let url = `Patient?_page=${page}&_count=${count}`;
     if (patientName && patientName.length >= 0) {
       url += `&name=${patientName}`;
     }
-    this.http.get(url).subscribe(patients  => {
+    this.getPatientsByUrl(url);
+  }
+
+  getPatientsByUrl(url: string): void {
+    let fullUrl = `${this.baseURL}/fhir/${url}`;
+    this.store.dispatch({ type: LOADING });
+    const query = new URL(fullUrl).search;
+    const page = new URLSearchParams(query).get('_page');
+    this.http.get(fullUrl).subscribe(patients => {
       this.store.dispatch({
         type: RECEIVE,
         data: patients["entry"].map(p => fhirToObject(p.resource)),
         count: patients["total"],
-        selectedPage: page
+        link: patients["link"],
+        currentPage: Number(page)
       });
     });
   }

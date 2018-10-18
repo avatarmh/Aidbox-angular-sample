@@ -13,24 +13,27 @@ const initialState = {
   loading: false,
   data: [],
   count: 0,
-  selectedPage: 1,
-  selectedPatientId: 0
+  currentPage: 1,
+  selectedPatientId: 0,
+  link: []
 };
 
 export interface PatientState {
   loading: boolean;
   data: Patient[];
   count: number;
-  selectedPage: number;
+  currentPage: number;
   selectedPatientId: number;
+  link: object[];
 }
 
 export interface PatientAction {
   type: string;
   data: Patient[];
   count: number;
-  selectedPage: number;
+  currentPage: number;
   selectedPatientId: number;
+  link: object[];
 }
 
 export function patientReducer(state: PatientState = initialState, action: PatientAction) {
@@ -47,7 +50,8 @@ export function patientReducer(state: PatientState = initialState, action: Patie
         loading: false,
         data: action.data,
         count: action.count,
-        selectedPage: action.selectedPage
+        currentPage: action.currentPage,
+        link: action.link
       };
 
     case APPEND:

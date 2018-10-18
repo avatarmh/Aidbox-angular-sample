@@ -1,38 +1,65 @@
 <div class="container">
-  <p>
-    Total patients count: {{ total  }}
-  </p>
+
+  <div *ngIf="total > 0">
+    <p>
+      Total patients count: {{ total }}
+    </p>
+  </div>
   <nav aria-label="Page navigation example">
     <ul class="pagination">
+
+
+      <div *ngIf="total > 0">
+        <li class="page-item"
+          [class.disabled]="!getUrl('previous')">
+          <a class="page-link" href="#"
+            aria-label="First page"
+            (click)="setPage('first')">
+
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">First page</span>
+          </a>
+        </li>
+      </div>
+
       <li class="page-item"
-        [class.disabled]="currentPage === 1">
+        [class.disabled]="!getUrl('previous')">
         <a class="page-link" href="#"
           aria-label="Previous"
-          (click)="setPage(currentPage - 1)">
+          (click)="setPage('previous')">
 
-          <span aria-hidden="true">&laquo;</span>
+          <span aria-hidden="true">&lsaquo;</span>
           <span class="sr-only">Previous</span>
         </a>
       </li>
 
+      <li class="page-item">
+        <div class="page-link">
+          {{ currentPage }}
+        </div>
+      </li>
 
       <li class="page-item"
-        *ngFor="let page of getPagesList()">
+        [class.disabled]="!getUrl('next')">
         <a class="page-link"
-          (click)="setPage(page + 1)"
-          href="#">
-          {{ page + 1 }}</a></li>
-
-
-      <li class="page-item"
-        [class.disabled]="currentPage === getPagesCount()">
-        <a class="page-link"
-          (click)="setPage(currentPage + 1)"
+          (click)="setPage('next')"
           href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
+          <span aria-hidden="true">&rsaquo;</span>
           <span class="sr-only">Next</span>
         </a>
       </li>
+
+      <div *ngIf="total > 0">
+        <li class="page-item"
+          [class.disabled]="!getUrl('next')">
+          <a class="page-link"
+            (click)="setPage('last')"
+            href="#" aria-label="Last page">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Last page</span>
+          </a>
+        </li>
+      </div>
     </ul>
   </nav>
 </div>

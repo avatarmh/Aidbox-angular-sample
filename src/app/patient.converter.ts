@@ -34,8 +34,9 @@ export const  objectToFhir = (obj): Object => {
 
 export const fhirToObject = (obj): Patient => {
   const { name: [ { given: [firstname], family: lastname } ],
-          address: [ { line: [street], state, city, postalCode: zcode } ],
-          telecom: telecom,
+          address: [ { line: [street], state, city, postalCode: zcode } ] =
+          [{ line: [street], state, city, postalCode: zcode }],
+          telecom = [],
           birthDate,
           gender,
           id
@@ -50,8 +51,8 @@ export const fhirToObject = (obj): Patient => {
   patient.gender = gender;
   patient.birthDate = birthDate;
   patient.zcode = zcode;
-  const emails =  telecom.filter(t => t.system === "email");
-  const phones =  telecom.filter(t => t.system === "phone")
+  const emails = telecom.filter(t => t.system === "email");
+  const phones = telecom.filter(t => t.system === "phone")
 
   patient.telecom = {
     emails: emails.length > 0 ? emails : [{ value: '', system: 'email'}],

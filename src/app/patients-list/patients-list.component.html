@@ -21,7 +21,7 @@
       {{ patient.lastName + " " + patient.firstName }}
     </a>
   </div>
-  <div *ngIf="data.length > 0">
+  <div *ngIf="data && data.length > 0">
     <app-pagination></app-pagination>
   </div>
 </div>

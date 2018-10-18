@@ -18,27 +18,24 @@ export class PaginationComponent {
   patients: Observable<PatientState>;
   currentPage: number;
   total: number;
+  link: object[];
 
   constructor(public patientService: PatientService, private store: Store<AppState>) {
     this.patients = store.pipe(select("patient"));
     this.patients.subscribe(pts => {
-      this.currentPage = pts.selectedPage;
+      this.currentPage = pts.currentPage;
       this.total = pts.count;
+      this.link = pts.link;
     })
   }
 
-  getPagesCount(): number {
-    return Math.ceil(this.total / defaultCount);
+  getUrl(direction): string {
+    const filtered = this.link.filter(l => l["relation"] === direction);
+    return filtered.length > 0 ? filtered[0]['url'] : null;
   }
 
-  getPagesList() {
-    const pagesCount = this.getPagesCount();
-    const list = Array(pagesCount).keys();
-    return Array.from(list);
+  setPage(direction): void {
+    const url = this.getUrl(direction);
+    this.patientService.getPatientsByUrl(url);
   }
-
-  setPage(page): void {
-    this.patientService.getPatients('', page);
-  }
-
 }
