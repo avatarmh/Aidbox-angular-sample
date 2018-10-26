@@ -41,7 +41,8 @@ export class AppComponent {
             console.debug('state', info.state);
         }
     })
-
+    if (!this.oauthService.getAccessToken())
+      this.oauthService.initImplicitFlow();
   }
 
 
