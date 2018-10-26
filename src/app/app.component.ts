@@ -6,6 +6,25 @@ import { PatientState } from './reducer/patient';
 import { Store, select } from '@ngrx/store';
 import { AppState } from './reducer';
 
+import { OAuthService, AuthConfig } from 'angular-oauth2-oidc';
+import { JwksValidationHandler } from 'angular-oauth2-oidc';
+
+import { environment } from '../../environment';
+
+
+import util from 'util';
+
+const authConfig: AuthConfig = {
+
+  issuer: environment.AIDBOX_URL,
+
+  redirectUri: window.location.origin,
+
+  clientId: 'SPA',
+
+  scope: 'openid profile',
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,5 +32,26 @@ import { AppState } from './reducer';
 })
 export class AppComponent {
   title = 'angular-frontend';
+
+
+  constructor(private oauthService: OAuthService) {
+    this.configureWithNewConfigApi();
+    this.oauthService.initImplicitFlow();
+    console.log(this.oauthService.getAccessToken());
+    console.log('QQQQQQq')
+    console.log(this.oauthService);
+    console.log(util.inspect(oauthService, { depth: null }));
+
+
+  }
+
+
+  private configureWithNewConfigApi() {
+    this.oauthService.configure(authConfig);
+    this.oauthService.loginUrl = environment.AIDBOX_URL + '/oauth2/authorize';
+    this.oauthService.tokenValidationHandler = new JwksValidationHandler();
+    this.oauthService.loadDiscoveryDocumentAndTryLogin();
+    // this.oauthService.loadDiscoveryDocumentAndLogin();
+  }
 
 }

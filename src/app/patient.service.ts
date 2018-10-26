@@ -13,9 +13,9 @@ import { Patient } from './patient';
 import { objectToFhir, fhirToObject } from './patient.converter';
 import { environment } from '../../environment';
 
-const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
-};
+import { OAuthService } from 'angular-oauth2-oidc';
+
+
 
 
 export const defaultCount: number = 10;
@@ -27,11 +27,18 @@ export const defaultCount: number = 10;
 export class PatientService {
 
   baseURL:string = environment.AIDBOX_URL;
+  httpOptions: object
 
   constructor(
     private http: HttpClient,
-    private store: Store<AppState>
-  ) { }
+    private store: Store<AppState>,
+    private oauthService: OAuthService
+  ) {
+    this.httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json',
+                                'Authorization': 'Bearer ' + this.oauthService.getAccessToken()})
+    };
+  }
 
   getPatients(patientName = '', page = 1, count = defaultCount): void {
     let url = `Patient?_page=${page}&_count=${count}`;
@@ -40,6 +47,7 @@ export class PatientService {
     }
     this.getPatientsByUrl(url);
   }
+
 
   getPatientsByUrl(url: string): void {
     let fullUrl = `${this.baseURL}/fhir/${url}`;
@@ -61,7 +69,7 @@ export class PatientService {
     const url = `${this.baseURL}/fhir/Patient`;
     const patientData = objectToFhir(patient);
     this.store.dispatch({ type: LOADING });
-    this.http.post(url, patientData, httpOptions)
+    this.http.post(url, patientData, this.httpOptions)
       .subscribe(p => {
         patient.id = p["id"];
         this.store.dispatch({ type: APPEND, data: [patient] });
@@ -72,7 +80,7 @@ export class PatientService {
   deletePatient(patient: Patient): void {
     const url = `${this.baseURL}/fhir/Patient/${patient.id}`;
     this.store.dispatch({ type: LOADING });
-    this.http.delete(url, httpOptions)
+    this.http.delete(url, this.httpOptions)
       .subscribe(p => {
         this.store.dispatch({ type: DELETE, data: [patient] });
       });
@@ -82,7 +90,7 @@ export class PatientService {
     const url = `${this.baseURL}/fhir/Patient/${patient.id}`;
     const patientData = objectToFhir(patient);
     this.store.dispatch({ type: LOADING });
-    this.http.put(url, patientData, httpOptions)
+    this.http.put(url, patientData, this.httpOptions)
       .subscribe(p => {
         this.store.dispatch({ type: UPDATE, data: [patient]});
       });

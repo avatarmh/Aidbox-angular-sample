@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { PatientFormComponent } from './patient-form/patient-form.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { OAuthModule } from 'angular-oauth2-oidc';
+
 import { PatientsListComponent } from './patients-list/patients-list.component';
 import { PaginationComponent } from './pagination/pagination.component';
 
@@ -24,7 +26,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    StoreModule.forRoot({ patient: patientReducer })
+    StoreModule.forRoot({ patient: patientReducer }),
+    OAuthModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
