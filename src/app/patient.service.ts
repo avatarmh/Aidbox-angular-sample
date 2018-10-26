@@ -54,7 +54,7 @@ export class PatientService {
     this.store.dispatch({ type: LOADING });
     const query = new URL(fullUrl).search;
     const page = new URLSearchParams(query).get('_page');
-    this.http.get(fullUrl).subscribe(patients => {
+    this.http.get(fullUrl, this.httpOptions).subscribe(patients => {
       this.store.dispatch({
         type: RECEIVE,
         data: patients["entry"].map(p => fhirToObject(p.resource)),

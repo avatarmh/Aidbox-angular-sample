@@ -36,12 +36,11 @@ export class AppComponent {
 
   constructor(private oauthService: OAuthService) {
     this.configureWithNewConfigApi();
-    this.oauthService.initImplicitFlow();
-    console.log(this.oauthService.getAccessToken());
-    console.log('QQQQQQq')
-    console.log(this.oauthService);
-    console.log(util.inspect(oauthService, { depth: null }));
-
+    this.oauthService.tryLogin({
+        onTokenReceived: (info) => {
+            console.debug('state', info.state);
+        }
+    })
 
   }
 
