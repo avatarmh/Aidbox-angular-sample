@@ -1,3 +1,3 @@
 export const environment = {
-  AIDBOX_URL : "http://localhost:8888"
+  AIDBOX_URL : "https://<YOUR-BOX>.aidbox.app"
 }
