@@ -40,7 +40,7 @@ export class AppComponent {
         onTokenReceived: (info) => {
             console.debug('state', info.state);
         }
-    })
+    });
     if (!this.oauthService.getAccessToken())
       this.oauthService.initImplicitFlow();
   }
@@ -48,6 +48,7 @@ export class AppComponent {
 
   private configureWithNewConfigApi() {
     this.oauthService.configure(authConfig);
+    this.oauthService.oidc = false;
     this.oauthService.loginUrl = environment.AIDBOX_URL + '/oauth2/authorize';
     this.oauthService.tokenValidationHandler = new JwksValidationHandler();
     this.oauthService.loadDiscoveryDocumentAndTryLogin();
