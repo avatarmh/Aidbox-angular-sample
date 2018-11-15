@@ -18,7 +18,7 @@
       [class.active]="patient.id === selectedPatientId"
       *ngFor="let patient of data"
       class="list-group-item list-group-item-action">
-      {{ patient.lastName + " " + patient.firstName }}
+      {{ patient.getDisplayedName() }}
     </a>
   </div>
   <div *ngIf="data && data.length > 0">

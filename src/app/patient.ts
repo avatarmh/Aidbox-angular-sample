@@ -16,11 +16,11 @@ export interface PatientTelecom {
 
 export class Patient {
   id: number;
-  firstName: string;
-  lastName: string;
-  street: string;
-  state: string;
-  city: string;
+  firstName?: string;
+  lastName?: string;
+  street?: string;
+  state?: string;
+  city?: string;
   gender?: string;
   birthDate?: string;
   zcode?: string;
@@ -28,4 +28,9 @@ export class Patient {
     emails: [{ system: 'email' }],
     phones: [{ system: 'phone' }]
   };
+
+  getDisplayedName () {
+    const fullName = [this.lastName, this.firstName].filter(x => !!x).join(" ");
+    return fullName || this.id;
+  }
 }

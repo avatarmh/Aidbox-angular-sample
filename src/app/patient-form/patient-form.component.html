@@ -2,26 +2,18 @@
   <h2>Patient info</h2>
   <form id="patientForm" #patientForm="ngForm" (ngSubmit)="onSubmit(patientForm)">
     <div class="form-group">
-      <label for="firstName">First name *</label>
+      <label for="firstName">First name</label>
       <input type="text" [readonly]="loading" class="form-control" id="firstName" name="firstName"
         [(ngModel)]="patient.firstName"
-        #firstName="ngModel" required>
-      <div *ngIf="firstName.touched && !firstName.valid"
-        class="alert">
-        First name is required
-      </div>
+        #firstName="ngModel">
     </div>
 
 
     <div class="form-group">
-      <label for="lastName">Last name *</label>
-      <input type="text" [readonly]="loading" class="form-control" id="lastName" required
+      <label for="lastName">Last name</label>
+      <input type="text" [readonly]="loading" class="form-control" id="lastName"
         [(ngModel)]="patient.lastName" name="lastName"
         #lastName="ngModel">
-      <div *ngIf="lastName.touched && !lastName.valid"
-        class="alert">
-        Last name is required
-      </div>
     </div>
 
     <div class="form-group">
@@ -48,24 +40,24 @@
     </div>
 
     <div class="form-group">
-      <label for="street">Street, home *</label>
+      <label for="street">Street</label>
       <input type="text" class="form-control" id="street" [readonly]="loading"
         [(ngModel)]="patient.street" name="street"
         #street="ngModel"
-        required>
+        >
       <div *ngIf="street.touched && !street.valid"
         class="alert"
-        required>
+        >
         Street is required
       </div>
     </div>
 
     <div class="form-group">
-      <label for="state">State *</label>
+      <label for="state">State</label>
       <input type="text" class="form-control" id="state" [readonly]="loading"
         [(ngModel)]="patient.state" name="state"
         #state="ngModel"
-        required>
+        >
       <div *ngIf="state.touched && !state.valid"
         class="alert">
         State is required
@@ -73,11 +65,11 @@
     </div>
 
     <div class="form-group">
-      <label for="city">City *</label>
+      <label for="city">City</label>
       <input type="text" class="form-control" id="city" [readonly]="loading"
         [(ngModel)]="patient.city" name="city"
         #city="ngModel"
-        required>
+        >
       <div *ngIf="city.touched && !city.valid"
         class="alert">
         City is required
@@ -105,12 +97,7 @@
             [(ngModel)]="patient.telecom.phones[i].value"
             #phone="ngModel"
             [name]="getNameForPhone(i)"
-            pattern="^[0-9]*$"
           >
-          <div *ngIf="phone.touched && !phone.valid"
-            class="alert">
-            Only numbers required
-          </div>
         </div>
       </div>
       <button class="btn btn-secondary btn-sm bottom"
@@ -131,7 +118,7 @@
           >
           <div *ngIf="email.touched && !email.valid"
             class="alert">
-            Wrong email format
+            Invalid email format
           </div>
         </div>
       </div>

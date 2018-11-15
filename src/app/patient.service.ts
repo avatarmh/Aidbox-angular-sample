@@ -41,7 +41,7 @@ export class PatientService {
   }
 
   getPatients(patientName = '', page = 1, count = defaultCount): void {
-    let url = `Patient?_page=${page}&_count=${count}`;
+    let url = `Patient?page=${page}&_count=${count}`;
     if (patientName && patientName.length >= 0) {
       url += `&name=${patientName}`;
     }
@@ -53,7 +53,7 @@ export class PatientService {
     let fullUrl = `${this.baseURL}/fhir/${url}`;
     this.store.dispatch({ type: LOADING });
     const query = new URL(fullUrl).search;
-    const page = new URLSearchParams(query).get('_page');
+    const page = new URLSearchParams(query).get('page');
     this.http.get(fullUrl, this.httpOptions).subscribe(patients => {
       this.store.dispatch({
         type: RECEIVE,

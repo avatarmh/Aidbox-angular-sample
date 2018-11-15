@@ -12,8 +12,6 @@ import { JwksValidationHandler } from 'angular-oauth2-oidc';
 import { environment } from '../../environment';
 
 
-import util from 'util';
-
 const authConfig: AuthConfig = {
 
   issuer: environment.AIDBOX_URL,
@@ -41,8 +39,9 @@ export class AppComponent {
             console.debug('state', info.state);
         }
     });
-    if (!this.oauthService.getAccessToken())
+    if (!this.oauthService.getAccessToken()) {
       this.oauthService.initImplicitFlow();
+    }
   }
 
 
