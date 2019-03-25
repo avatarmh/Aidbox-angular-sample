@@ -48,7 +48,7 @@ export class AppComponent {
   private configureWithNewConfigApi() {
     this.oauthService.configure(authConfig);
     this.oauthService.oidc = false;
-    this.oauthService.loginUrl = environment.AIDBOX_URL + '/oauth2/authorize';
+    this.oauthService.loginUrl = environment.AIDBOX_URL + '/auth/authorize';
     this.oauthService.tokenValidationHandler = new JwksValidationHandler();
     this.oauthService.loadDiscoveryDocumentAndTryLogin();
     // this.oauthService.loadDiscoveryDocumentAndLogin();
